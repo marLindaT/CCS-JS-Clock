@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CSS and JS Clock</title>
+</head>
+
+<style>
+body{
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+	background-image: linear-gradient(blue, white);
+}
+
+#clock-face{
+	position: relative;
+	width: 30vw;
+	height: 30vw;
+	left: 15vw;
+	top: 15vh;
+
+	border-radius: 50%;
+	border: 2px dashed black;
+}
+.clock-hand{
+	position: absolute;
+	width: 15vw;
+	height: 0.5vw;
+	top: 15vw;
+
+
+	background-color: black;
+	transform-origin: 100% 100%;
+	transform: rotate(90deg);
+}
+
+#second-hand{
+	background-color: red;
+	height: 0.25vw;
+}
+#hour-hand{
+	width: 10vw;
+	left:4vw;
+	
+}
+
+</style>
+<body>
+
+
+	<div id='clock-face'>
+		<div id='hour-hand' class='clock-hand'></div>
+		<div id='minute-hand' class='clock-hand'></div>
+		<div id='second-hand' class='clock-hand'></div>
+	</div>
+
+	<script>
+
+		const updateClock = ()=>{
+			let time = new Date();
+			let secondHand = document.querySelector("#second-hand");
+			let minuteHand = document.querySelector("#minute-hand");
+			let hourHand = document.querySelector("#hour-hand");
+
+
+			let seconds =time.getSeconds();
+				secondHand.style.transform = `rotate(${(seconds*6 )+90}deg)`;
+
+			let minutes =time.getMinutes();
+				minuteHand.style.transform = `rotate(${(minutes*6 )+90}deg)`;
+
+			let hours =time.getHours();
+				hourHand.style.transform = `rotate(${(hours*(360/12) )+90}deg)`;
+			
+		}
+
+
+	setInterval(updateClock, 250);
+
+	</script>
+</body>
+</html>
